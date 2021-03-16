@@ -28,6 +28,6 @@ public class Product {
 
     private String sku;
 
-    private String value;
+    private String price;
 
 }
