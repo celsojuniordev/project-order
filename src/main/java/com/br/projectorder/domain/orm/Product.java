@@ -19,9 +19,6 @@ public class Product {
     private Integer id;
 
     @ManyToOne
-    @JoinTable(name="request_product",
-            joinColumns={@JoinColumn(name="product_id")},
-            inverseJoinColumns={@JoinColumn(name="request_id")})
     private Request request;
 
     private String name;

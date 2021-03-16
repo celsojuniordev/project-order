@@ -22,11 +22,13 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Customer customer;
 
-    @OneToMany(mappedBy = "request")
-    @Fetch(FetchMode.JOIN)
+    @OneToMany
+    @JoinTable(name="request_product",
+            joinColumns={@JoinColumn(name="request_id")},
+            inverseJoinColumns={@JoinColumn(name="product_id")})
     private List<Product> products;
 
     private String address;
