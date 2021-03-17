@@ -7,14 +7,12 @@ import com.br.projectorder.domain.repository.CustomerRepository;
 import com.br.projectorder.domain.repository.ProductRepository;
 import com.br.projectorder.domain.repository.RequestRepository;
 import com.br.projectorder.exception.NotFoundException;
+import com.br.projectorder.rabbitmq.Message;
+import com.br.projectorder.rabbitmq.AmqpMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import static java.util.Objects.isNull;
+import java.util.*;
 
 @Service
 public class RequestService {
@@ -27,6 +25,9 @@ public class RequestService {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private AmqpMessage<Message> amqpMessage;
 
     public Request save(Request request) {
         Optional<Customer> customer = customerRepository.findById(request.getCustomer().getId());
@@ -43,6 +44,13 @@ public class RequestService {
         });
         long totalPrice = products.stream().mapToLong(Product::getPrice).sum();
         request.setFinalPrice(totalPrice);
-        return requestRepository.save(request);
+        requestRepository.save(request);
+
+        Message message = new Message();
+        message.setAddress(request.getAddress());
+        message.setRequestId(request.getId());
+        amqpMessage.producer(message);
+
+        return request;
     }
 }
