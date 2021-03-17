@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -21,10 +22,10 @@ public class Product {
     @ManyToOne
     private Request request;
 
+    @NotNull(message = "Nome é obrigatório")
     private String name;
 
-    private String sku;
-
-    private String price;
+    @NotNull(message = "Preço é obrigatório")
+    private Long price;
 
 }
