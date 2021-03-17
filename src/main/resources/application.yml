@@ -9,3 +9,15 @@ spring:
   h2:
     console:
       enabled: true
+  rabbitmq:
+    request:
+      host: localhost
+      port: 5672
+      username: guest
+      password: guest
+      exchenge:
+        producer: ex.producer.request-send
+      routing-key:
+        producer: rk.producer.request-send
+      deadletter:
+        producer: dl.producer.request-send
