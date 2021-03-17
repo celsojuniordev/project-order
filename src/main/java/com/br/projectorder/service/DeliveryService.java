@@ -16,7 +16,7 @@ public class DeliveryService {
 
         Delivery delivery = new Delivery();
         delivery.setAddress(message.getAddress());
-        delivery.setProductId(message.getProductId());
+        delivery.setRequestId(message.getRequestId());
 
         deliveryRepository.save(delivery);
     }

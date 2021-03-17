@@ -20,7 +20,7 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer productId;
+    private Integer requestId;
 
     private String address;
 }

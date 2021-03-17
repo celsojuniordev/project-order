@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class Request {
     @NotNull(message = "Produto é obrigatório")
     private List<Product> products;
 
-    @NotNull(message = "Endereço é obrigatório")
+    @NotBlank(message = "Endereço é obrigatório")
     private String address;
 
     private Long finalPrice;
