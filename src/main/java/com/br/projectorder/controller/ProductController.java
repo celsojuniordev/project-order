@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/product")
 public class ProductController {
@@ -17,8 +19,7 @@ public class ProductController {
     private ProductService service;
 
     @PostMapping
-    public ResponseEntity<Product> save(@RequestBody Product product) {
-
+    public ResponseEntity<Product> save(@RequestBody @Valid Product product) {
         return ResponseEntity.ok(service.save(product));
     }
 }
