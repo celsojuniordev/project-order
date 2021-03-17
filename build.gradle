@@ -29,6 +29,11 @@ dependencies {
 	//validation-api
 	implementation group: 'org.hibernate.validator', name: 'hibernate-validator', version: '6.1.5.Final'
 
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-amqp
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version: '2.4.3'
+
+	// https://mvnrepository.com/artifact/org.springframework.amqp/spring-rabbit-test
+	implementation group: 'org.springframework.amqp', name: 'spring-rabbit-test', version: '2.3.5'
 }
 
 test {
