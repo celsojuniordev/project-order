@@ -2,6 +2,7 @@ package com.br.projectorder.repository;
 
 import com.br.projectorder.domain.orm.Product;
 import com.br.projectorder.domain.repository.ProductRepository;
+import com.br.projectorder.service.ProductService;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ProductRepositoryTest {
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductService productService;
 
     @Test
     public void AsaveTest() {
@@ -27,7 +28,7 @@ public class ProductRepositoryTest {
         product.setName("Produto 1");
         product.setPrice(1000L);
 
-        productRepository.save(product);
+        productService.save(product);
 
         assertThat(product.getName()).isEqualTo("Produto 1");
         assertThat(product.getId()).isEqualTo(1);

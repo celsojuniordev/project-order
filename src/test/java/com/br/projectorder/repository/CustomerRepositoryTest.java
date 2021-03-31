@@ -2,6 +2,7 @@ package com.br.projectorder.repository;
 
 import com.br.projectorder.domain.orm.Customer;
 import com.br.projectorder.domain.repository.CustomerRepository;
+import com.br.projectorder.service.CustomerService;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,14 +20,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CustomerRepositoryTest {
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private CustomerService customerService;
 
     @Test
     public void AsaveTest() {
         Customer customer = new Customer();
         customer.setName("Celso");
 
-        customerRepository.save(customer);
+        customerService.save(customer);
 
         assertThat(customer.getName()).isEqualTo("Celso");
         assertThat(customer.getId()).isEqualTo(1);

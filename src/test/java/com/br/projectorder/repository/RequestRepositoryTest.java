@@ -6,6 +6,9 @@ import com.br.projectorder.domain.orm.Request;
 import com.br.projectorder.domain.repository.CustomerRepository;
 import com.br.projectorder.domain.repository.ProductRepository;
 import com.br.projectorder.domain.repository.RequestRepository;
+import com.br.projectorder.service.CustomerService;
+import com.br.projectorder.service.ProductService;
+import com.br.projectorder.service.RequestService;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,13 +29,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RequestRepositoryTest {
 
     @Autowired
-    private RequestRepository requestRepository;
+    private CustomerService customerService;
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private ProductService productService;
 
     @Autowired
-    private ProductRepository productRepository;
+    private RequestService requestService;
 
     @Test
     public void AsaveTest() {
@@ -44,23 +47,25 @@ public class RequestRepositoryTest {
         product2.setName("Produto 2");
         product2.setPrice(1000L);
 
+        productService.save(product1);
+        productService.save(product2);
+
         List<Product> products = new ArrayList<>();
         products.add(product1);
         products.add(product2);
-        productRepository.saveAll(products);
+
 
         Customer customer = new Customer();
         customer.setName("Celso");
 
-        customerRepository.save(customer);
+        customerService.save(customer);
 
         Request request = new Request();
         request.setAddress("Rua teste 1");
         request.setProducts(products);
         request.setCustomer(customer);
-        request.setFinalPrice(2000L);
 
-        requestRepository.save(request);
+        requestService.save(request);
 
         assertThat(request.getFinalPrice()).isEqualTo(2000L);
         assertThat(request.getId()).isEqualTo(1);
