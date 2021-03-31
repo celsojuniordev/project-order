@@ -2,7 +2,6 @@ package com.br.projectorder.controller;
 
 import com.br.projectorder.domain.orm.Customer;
 import com.br.projectorder.service.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,8 +14,11 @@ import javax.validation.Valid;
 @RequestMapping("/customer")
 public class CustomerController {
 
-    @Autowired
-    private CustomerService service;
+    private final CustomerService service;
+
+    public CustomerController(CustomerService service) {
+        this.service = service;
+    }
 
     @PostMapping
     public ResponseEntity<Customer> save(@RequestBody @Valid Customer customer) {

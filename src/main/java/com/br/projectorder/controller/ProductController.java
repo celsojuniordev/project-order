@@ -2,7 +2,6 @@ package com.br.projectorder.controller;
 
 import com.br.projectorder.domain.orm.Product;
 import com.br.projectorder.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,8 +14,11 @@ import javax.validation.Valid;
 @RequestMapping("/product")
 public class ProductController {
 
-    @Autowired
-    private ProductService service;
+    private final ProductService service;
+
+    public ProductController(ProductService service) {
+        this.service = service;
+    }
 
     @PostMapping
     public ResponseEntity<Product> save(@RequestBody @Valid Product product) {

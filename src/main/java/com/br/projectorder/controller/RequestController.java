@@ -2,6 +2,7 @@ package com.br.projectorder.controller;
 
 import com.br.projectorder.domain.orm.Request;
 import com.br.projectorder.service.RequestService;
+import com.br.projectorder.service.impl.RequestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,8 +16,11 @@ import javax.validation.Valid;
 @RequestMapping("/request")
 public class RequestController {
 
-    @Autowired
-    private RequestService requestService;
+    private final RequestService requestService;
+
+    public RequestController(RequestService requestService) {
+        this.requestService = requestService;
+    }
 
     @PostMapping
     public ResponseEntity<Request> save(@RequestBody @Valid Request request) {
