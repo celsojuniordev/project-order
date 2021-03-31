@@ -1,15 +1,15 @@
-package com.br.projectorder.rabbitmq;
+package com.br.projectorder.rabbitmq.producer;
 
-import com.br.projectorder.service.DeliveryService;
+import com.br.projectorder.rabbitmq.AmqpMessageProducer;
+import com.br.projectorder.rabbitmq.model.Message;
 import org.springframework.amqp.AmqpRejectAndDontRequeueException;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProducerRabbitMQ implements AmqpMessage<Message> {
+public class ProducerRabbitMQImpl implements AmqpMessageProducer<Message> {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
@@ -20,9 +20,6 @@ public class ProducerRabbitMQ implements AmqpMessage<Message> {
     @Value("${spring.rabbitmq.request.exchenge.producer}")
     private String exchenge;
 
-    @Autowired
-    private DeliveryService deliveryService;
-
     @Override
     public void producer(Message message) {
         try{
@@ -31,14 +28,4 @@ public class ProducerRabbitMQ implements AmqpMessage<Message> {
             throw new AmqpRejectAndDontRequeueException(ex);
         }
     }
-
-    @RabbitListener(queues = "rk.producer.request-send")
-    public void consumer(Message message) {
-        try {
-            deliveryService.saveDelivery(message);
-        }catch (Exception ex){
-            throw new AmqpRejectAndDontRequeueException(ex);
-        }
-    }
-
 }

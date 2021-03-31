@@ -1,6 +1,6 @@
 package com.br.projectorder.rabbitmq;
 
-public interface AmqpMessage<T> {
+public interface AmqpMessageProducer<T> {
 
     void producer(T t);
 

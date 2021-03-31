@@ -1,4 +1,4 @@
-package com.br.projectorder.rabbitmq;
+package com.br.projectorder.rabbitmq.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

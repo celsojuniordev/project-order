@@ -1,4 +1,4 @@
-package com.br.projectorder.rabbitmq;
+package com.br.projectorder.rabbitmq.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.StdDateFormat;
